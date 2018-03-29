@@ -17,7 +17,7 @@ void callback_roll(const std_msgs::Float64& msg)
 
 void callback_pitch(const std_msgs::Float64& msg)
 {
-    pitch = msg.data;
+    pitch = -msg.data;     /*!< According to gimbal mechanism orientation */
 }
 
 void callback_heading(const std_msgs::Float64& msg)
@@ -154,6 +154,8 @@ int main(int argc, char **argv)
         write(fd, "I", 1);     
 
         //usleep(500000);
+
+        cout << "Roll: " << roll << "   Pitch: " << pitch << "  Heading: " << heading << endl;
 
         ros::spinOnce();
         loop_rate.sleep();
